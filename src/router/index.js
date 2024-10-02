@@ -1,5 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import JobView from '@/views/jobs/JobView.vue';
+import JobDetailView from '@/views/jobs/JobDetailView.vue';
+import NotFoundView from '@/views/NotFoundView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +10,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
     },
     {
       path: '/about',
@@ -15,9 +18,33 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    }
-  ]
-})
+      component: () => import('../views/AboutView.vue'),
+    },
+    {
+      path: '/jobs',
+      name: 'jobs',
+      component: JobView,
+    },
+    {
+      path: '/jobs/:id',
+      name: 'jobDetails',
+      component: JobDetailView,
+      props: true,
+    },
 
-export default router
+    // Redirect
+    {
+      path: '/all-jobs',
+      redirect: '/jobs',
+    },
+
+    // Catch all 404
+    {
+      path: '/:catchAll(.*)',
+      name: 'notFound',
+      component: NotFoundView
+    }
+  ],
+});
+
+export default router;
