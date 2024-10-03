@@ -1,30 +1,51 @@
-<script>
-import { RouterLink, RouterView } from 'vue-router';
-
-export default {
-  components: { RouterLink, RouterView },
-};
-</script>
-
 <template>
   <header>
     <div class="wrapper">
       <nav>
-        <RouterLink :to="{ name: 'home' }">Home</RouterLink>
-        <RouterLink :to="{ name: 'about' }">About</RouterLink>
-        <RouterLink :to="{ name: 'jobs' }">Jobs</RouterLink>
+        <router-link :to="{ name: 'home' }">Home</router-link>
+        <router-link :to="{ name: 'about' }">About</router-link>
+        <router-link :to="{ name: 'jobs' }">Jobs</router-link>
+        <router-link :to="{ name: 'userList' }">Users</router-link>
       </nav>
     </div>
   </header>
-
-  <RouterView />
+  <div class="button-group">
+    <button @click="goBack">Go back</button>
+    <button @click="redirect">Redirect</button>
+    <button @click="goForward">Go forward</button>
+  </div>
+  <main>
+    <router-view></router-view>
+  </main>
 </template>
+
+<script>
+export default {
+  methods: {
+    redirect() {
+      this.$router.push({
+        name: 'home',
+      });
+    },
+    goBack() {
+      this.$router.back(); // Equivalent to $router.go(-1)
+    },
+    goForward() {
+      this.$router.forward(); // Equivalent to $router.go(1)
+    },
+  },
+};
+</script>
 
 <style>
 #app {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
   color: #2c3e50;
+}
+
+.wrapper {
+  margin-bottom: 20px;
 }
 
 nav {
@@ -45,5 +66,18 @@ nav a {
   text-decoration: none;
   padding: 10px;
   border-radius: 4px;
+}
+
+button {
+  margin: 0 10px;
+  padding: 10px;
+  /* border: none; */
+  /* border-radius: 4px; */
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
 }
 </style>
