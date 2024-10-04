@@ -1,15 +1,14 @@
 <template>
   <div class="container" v-if="!isFetching">
-    <div class="countries-list" v-for="country in countries" :key="country.id">
-      <div>
-        {{ country }}
-      </div>
-    </div>
+    <CountryRow v-for="country in countries" :key="country.id" :country="country" />
   </div>
 </template>
 
 <script>
+import CountryRow from '@/components/countries/CountryRow.vue';
+
 export default {
+  components: { CountryRow },
   data() {
     return {
       countries: [],
@@ -26,6 +25,7 @@ export default {
             id: item.cca2,
             name: item.name.common,
             capital: item.capital ? item.capital[0] : 'Unknown',
+            flag: item.flags.svg,
           });
         });
         this.isFetching = false;
@@ -34,4 +34,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.country-list {
+  display: flex;
+  width: 360px;
+  margin: 12px;
+}
+</style>

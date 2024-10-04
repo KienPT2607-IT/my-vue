@@ -81,4 +81,8 @@ button {
   justify-content: space-between;
   margin-bottom: 24px;
 }
+
+main {
+  padding: 0 32px;
+}
 </style>
