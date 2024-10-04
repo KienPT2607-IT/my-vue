@@ -43,6 +43,9 @@ export default {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
   color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .wrapper {
@@ -84,5 +87,6 @@ button {
 
 main {
   padding: 0 32px;
+  flex-grow: 1;
 }
 </style>

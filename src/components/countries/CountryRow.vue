@@ -25,7 +25,7 @@ export default {
   border-radius: 8px;
 }
 .country-row img {
-  width: 100px;
+  height: 50px;
   margin-right: 16px;
 }
 </style>
