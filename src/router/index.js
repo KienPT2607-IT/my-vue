@@ -5,6 +5,7 @@ import JobDetailView from '@/views/jobs/JobDetailView.vue';
 import NotFoundView from '@/views/NotFoundView.vue';
 import UserList from '@/views/users/UserList.vue';
 import UserDetails from '@/views/users/UserDetails.vue';
+import AllCountriesView from '@/views/countries/AllCountriesView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,6 +50,13 @@ const router = createRouter({
       props: true,
     },
 
+    // Countries
+    {
+      path: '/countries',
+      name: 'allCountries',
+      component: AllCountriesView,
+    },
+
     // * Redirect
     {
       path: '/all-jobs',
@@ -59,7 +67,7 @@ const router = createRouter({
     {
       path: '/:catchAll(.*)',
       name: 'notFound',
-      component: NotFoundView
+      component: NotFoundView,
     },
   ],
 });

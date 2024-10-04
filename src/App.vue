@@ -6,6 +6,7 @@
         <router-link :to="{ name: 'about' }">About</router-link>
         <router-link :to="{ name: 'jobs' }">Jobs</router-link>
         <router-link :to="{ name: 'userList' }">Users</router-link>
+        <router-link :to="{ name: 'allCountries' }">Countries</router-link>
       </nav>
     </div>
   </header>
