@@ -62,20 +62,15 @@ export default {
 
 <style>
 .page-layout {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100%;
   justify-content: space-between;
 }
 .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
-.country-list {
-  display: flex;
-  width: 360px;
-  margin: 12px;
 }
 .pagination-controls {
   display: flex;

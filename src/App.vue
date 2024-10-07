@@ -15,9 +15,9 @@
     <button @click="redirect">Redirect</button>
     <button @click="goForward">Go forward</button>
   </div>
-  <main>
+  <div class="main-content">
     <router-view></router-view>
-  </main>
+  </div>
 </template>
 
 <script>
@@ -45,11 +45,15 @@ export default {
   color: #2c3e50;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 .wrapper {
   margin-bottom: 20px;
+}
+
+.main-content {
+  height: 100%;
+  margin-bottom: 24px;
 }
 
 nav {

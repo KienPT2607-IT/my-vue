@@ -34,7 +34,9 @@ a,
   }
 } */
 body,
-html {
+html,
+#app {
   background: #eee;
   height: 100%;
+  margin: 0;
 }
