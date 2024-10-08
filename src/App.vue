@@ -1,34 +1,59 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <router-link :to="{ name: 'home' }">Home</router-link>
+        <router-link :to="{ name: 'about' }">About</router-link>
+        <router-link :to="{ name: 'jobs' }">Jobs</router-link>
+        <router-link :to="{ name: 'userList' }">Users</router-link>
+        <router-link :to="{ name: 'allCountries' }">Countries</router-link>
       </nav>
     </div>
   </header>
-
-  <RouterView />
+  <div class="button-group">
+    <button @click="goBack">Go back</button>
+    <button @click="redirect">Redirect</button>
+    <button @click="goForward">Go forward</button>
+  </div>
+  <div class="main-content">
+    <router-view></router-view>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<script>
+export default {
+  methods: {
+    redirect() {
+      this.$router.push({
+        name: 'home',
+      });
+    },
+    goBack() {
+      this.$router.back(); // Equivalent to $router.go(-1)
+    },
+    goForward() {
+      this.$router.forward(); // Equivalent to $router.go(1)
+    },
+  },
+};
+</script>
+
+<style>
+#app {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: #2c3e50;
+  display: flex;
+  flex-direction: column;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.wrapper {
+  margin-bottom: 20px;
+}
+
+.main-content {
+  height: 100%;
+  margin-bottom: 24px;
 }
 
 nav {
@@ -39,47 +64,34 @@ nav {
 }
 
 nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+  color: white;
+  background: crimson;
 }
 
 nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+  font-weight: bold;
+  color: #2c3e50;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 4px;
 }
 
-nav a:first-of-type {
-  border: 0;
+button {
+  margin: 0 10px;
+  padding: 10px;
+  cursor: pointer;
+  /* border: none; */
+  /* border-radius: 4px; */
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+main {
+  padding: 0 32px;
+  flex-grow: 1;
 }
 </style>
