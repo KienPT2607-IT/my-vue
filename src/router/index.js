@@ -6,12 +6,24 @@ import NotFoundView from '@/views/NotFoundView.vue';
 import UserList from '@/views/users/UserList.vue';
 import UserDetails from '@/views/users/UserDetails.vue';
 import AllCountriesView from '@/views/countries/AllCountriesView.vue';
+import LoginView from '@/views/accounts/LoginView.vue';
+import RegisterView from '@/views/accounts/RegisterView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '/login',
+      name: 'login',
+      component: LoginView,
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: RegisterView,
+    },
+    {
+      path: '/home',
       name: 'home',
       component: HomeView,
     },
@@ -62,7 +74,10 @@ const router = createRouter({
       path: '/all-jobs',
       redirect: '/jobs',
     },
-
+    {
+      path: '/',
+      redirect: '/login',
+    },
     // * Catch all 404
     {
       path: '/:catchAll(.*)',
