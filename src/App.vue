@@ -79,6 +79,7 @@ nav a {
 button {
   margin: 0 10px;
   padding: 10px;
+  cursor: pointer;
   /* border: none; */
   /* border-radius: 4px; */
 }

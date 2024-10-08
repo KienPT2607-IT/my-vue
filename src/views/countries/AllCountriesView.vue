@@ -1,7 +1,7 @@
 <template>
   <div class="page-layout">
     <div class="container" v-if="!isFetching">
-      <CountryRow v-for="country in paginatedCountries" :key="country.id" :country="country" />
+      <CountryRow v-for="country in paginatedCountries" :key="country.code" :country="country" />
     </div>
     <div class="pagination-controls">
       <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
@@ -38,7 +38,7 @@ export default {
       .then((data) => {
         data.map((item) => {
           this.countries.push({
-            id: item.cca2,
+            code: item.cca2,
             name: item.name.common,
             capital: item.capital ? item.capital[0] : 'Unknown',
             flag: item.flags.svg,
@@ -60,7 +60,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .page-layout {
   height: 100%;
   display: flex;
