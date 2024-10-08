@@ -1,4 +1,4 @@
 export const MOC_ACCOUNT = {
    username: 'kienpt',
-   password: '123456',
+   password: 'Kienpham2607',
 }

@@ -1,21 +1,35 @@
 <template>
   <div class="container">
-    <div class="form-container">
+    <div class="form-container" @submit.prevent="handleLogin">
       <form action="">
         <h3>Login</h3>
         <div class="form-holder">
-          <span>
+          <span class="icon-label">
             <IconUser />
           </span>
-          <input type="text" class="form-control" placeholder="Username" v-model="username" />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Username"
+            v-model="username"
+            @input="validateUsername"
+          />
+          <span v-if="usernameError" class="error">* {{ usernameError }}</span>
         </div>
         <div class="form-holder">
-          <span>
+          <span class="icon-label">
             <IconLock />
           </span>
-          <input type="password" class="form-control" placeholder="Password" v-model="password" />
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            v-model="password"
+            @input="validatePassword"
+          />
+          <span v-if="passwordError" class="error">* {{ passwordError }}</span>
         </div>
-        <button @click="handleLogin">Login</button>
+        <button type="submit" :disabled="disableSubmit">Login</button>
       </form>
     </div>
   </div>
@@ -32,13 +46,57 @@ export default {
     return {
       username: '',
       password: '',
+      usernameError: '',
+      passwordError: '',
     };
   },
   methods: {
     handleLogin() {
+      if (this.usernameError && this.passwordError) return;
+
       if (this.username === MOC_ACCOUNT.username && this.password === MOC_ACCOUNT.password) {
         this.$router.push('/home');
       }
+    },
+    validateUsername() {
+      const usernameRegex = /^[^\s]{6,16}$/;
+      if (!this.username) {
+        this.usernameError = '';
+      } else {
+        if (this.username.length < 6) {
+          this.usernameError = 'Username must be at least 6 chars long.';
+        } else if (this.username.length > 16) {
+          this.usernameError = 'Username must be at most 16 chars long.';
+        } else if (!usernameRegex.test(this.username)) {
+          this.usernameError = 'Username cannot contain spaces.';
+        } else {
+          this.usernameError = '';
+        }
+      }
+    },
+    validatePassword() {
+      if (!this.password) {
+        this.passwordError = '';
+      } else {
+        if (this.password.length < 6 || this.password.length > 16) {
+          this.passwordError = 'Password must be between 6 and 16 characters long.';
+        } else if (!/[a-z]/.test(this.password)) {
+          this.passwordError = 'Password must contain at least one lowercase letter.';
+        } else if (!/[A-Z]/.test(this.password)) {
+          this.passwordError = 'Password must contain at least one uppercase letter.';
+        } else if (!/[0-9]/.test(this.password)) {
+          this.passwordError = 'Password must contain at least one number.';
+        } else {
+          this.passwordError = '';
+        }
+      }
+    },
+  },
+  computed: {
+    disableSubmit() {
+      const hasError = !this.usernameError || !this.passwordError;
+      const isRequiredFieldsEmpty = !this.username || !this.password;
+      return hasError || isRequiredFieldsEmpty;
     },
   },
 };
@@ -61,7 +119,7 @@ export default {
   position: relative;
   margin-bottom: 21px;
 }
-.form-holder span {
+.icon-label {
   position: absolute;
   left: 0;
   top: 50%;
@@ -91,6 +149,12 @@ form {
   width: 100%;
   padding: 77px 61px 66px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.error {
+  color: red;
+  font-size: 0.75em;
+  position: absolute;
+  left: 0;
 }
 input {
   width: 100%;
