@@ -30,6 +30,10 @@
           <span v-if="passwordError" class="error">* {{ passwordError }}</span>
         </div>
         <button type="submit" :disabled="disableSubmit">Login</button>
+        <div class="form-action">
+          <router-link :to="{ name: 'home' }">Recover password</router-link>
+          <router-link :to="{ name: 'register' }">Sign up</router-link>
+        </div>
       </form>
     </div>
   </div>
@@ -103,6 +107,15 @@ export default {
 </script>
 
 <style scoped>
+.custom-link::after {
+  content: ' First After';
+  color: red;
+}
+
+.nested-element::after {
+  content: ' Second After';
+  color: blue;
+}
 .container {
   background: #adcffd;
   display: flex;
@@ -110,21 +123,56 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
 .form-container {
   background: #ffffff;
   width: 435px;
   display: flex;
 }
+
 .form-holder {
   position: relative;
   margin-bottom: 21px;
 }
+
+.form-action {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+a:active,
+a:focus {
+  color: inherit;
+}
+a::after {
+  content: '';
+  background: none;
+  border-radius: 10px;
+  width: 0;
+  height: 3px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transition: 0.5s;
+}
+a:hover::after {
+  background: #adcffd;
+  width: 100%;
+}
+
 .icon-label {
   position: absolute;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
 }
+
 .form-control {
   border: none;
   border-bottom: 1px solid #e6e6e6;
@@ -136,6 +184,7 @@ export default {
   color: #666;
   box-sizing: border-box;
 }
+
 h3 {
   text-align: center;
   text-transform: uppercase;
@@ -145,17 +194,20 @@ h3 {
   letter-spacing: 3px;
   color: #333;
 }
+
 form {
   width: 100%;
   padding: 77px 61px 66px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
 .error {
   color: red;
   font-size: 0.75em;
   position: absolute;
   left: 0;
 }
+
 input {
   width: 100%;
   font-size: 1em;
@@ -163,6 +215,7 @@ input {
 input:focus {
   outline: none;
 }
+
 button {
   width: 100%;
   height: 49px;
@@ -193,12 +246,10 @@ button::after {
   transition: transform 0.5s;
   transform: translateX(-100%);
 }
-
 button:hover::before,
 button:hover::after {
   transform: translateX(0); /* Move the effect from left to right */
 }
-
 button:active::before,
 button:active::after {
   transform: translateX(0); /* Keeps the effect visible on click */

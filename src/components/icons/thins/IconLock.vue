@@ -15,6 +15,5 @@
       stroke="#222222"
       stroke-linecap="round"
     />
-    <circle cx="12" cy="15" r="2" fill="#222222" />
   </svg>
 </template>

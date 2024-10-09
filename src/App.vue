@@ -1,5 +1,5 @@
 <template>
-  <header v-if="$route.path !== '/login'">
+  <header v-if="!strictRoutes.includes($route.path)">
     <div class="wrapper">
       <nav>
         <router-link :to="{ name: 'home' }">Home</router-link>
@@ -10,7 +10,7 @@
       </nav>
     </div>
   </header>
-  <div v-if="$route.path !== '/login'" class="button-group">
+  <div v-if="!strictRoutes.includes($route.path)" class="button-group">
     <button @click="goBack">Go back</button>
     <button @click="redirect">Redirect</button>
     <button @click="goForward">Go forward</button>
@@ -23,6 +23,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      strictRoutes: ['/login', '/register'],
+    };
+  },
   methods: {
     redirect() {
       this.$router.push({
